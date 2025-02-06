@@ -1,0 +1,107 @@
+import astropy.units as u
+from astropy.coordinates import AltAz, EarthLocation, SkyCoord
+from astropy.time import Time
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+import math
+from astropy.time import Time
+from astropy.coordinates import solar_system_ephemeris, get_body_barycentric, CartesianRepresentation, EarthLocation, AltAz
+import astropy.units as u
+
+sun_coordinates = []
+
+# Replace the following with your sets of x, y, z coordinates
+coordinates_HELIO = [
+    # Add more sets of coordinates here
+]
+
+coordinates_aneas= [
+      (-1.9450183126216503, 6.240668165220842, 0.37609443629541994),
+(-2.463409525172221, 6.245218672920104, 0.3780713668935791),
+(-2.91442986467428, 6.011054851083249, 0.2765703585194759),
+(-3.176384443778781, 5.603258045522445, 0.0998016392410977),
+(-3.182764116410146, 5.133398388074816, -0.10387189999053324),
+(-2.937676400319218, 4.725191073056553, -0.2808220997604968),
+(-2.5090523614687994, 4.481205350239164, -0.3865868105904437),
+(-2.0071801939977774, 4.459941847334869, -0.39580658473872693),
+(-1.5574242479445137, 4.6653651124544515, -0.3067621875938241),
+(-1.2726110478571526, 5.0473231073687606, -0.1411928413805476),
+(-1.2277287646287474, 5.511545086395882, 0.06003749345514946),
+(-1.4398084428420694, 5.939281537276665, 0.2454534917242804),
+(-1.8584617216843171, 6.215994187027174, 0.36540490965604805),
+(-2.374121688448978, 6.2641125371708055, 0.3862662040320005),
+(-2.8469409740177607, 6.068783640141809, 0.30159924139640293),
+(-3.1488151241295066, 5.68418657609795, 0.13488946526318954),
+(-3.2017615488656093, 5.2160576706418516, -0.06802958139171597),
+(-2.9974427788326317, 4.788603416554053, -0.25331777008062867),
+(-2.593887731848414, 4.51012430164357, -0.3740296824166927),
+(-2.0958915078392604, 4.447936909033421, -0.40098530723562625),
+(-1.6282233103574888, 4.615793146417906, -0.3282234877456307),
+(-1.307819032261463, 4.972542726554897, -0.1735816077884025),
+(-1.217925521885432, 5.430497115609867, 0.024929991022786587)
+      
+ ]
+
+# Extract x, y, and z coordinates from the list of tuples
+'''x = [coord[0] for coord in coordinates_HELIO]
+y = [coord[1] for coord in coordinates_HELIO]
+z = [coord[2] for coord in coordinates_HELIO]'''
+
+x2 = [coord[0] for coord in coordinates_aneas]
+y2 = [coord[1] for coord in coordinates_aneas]
+z2 = [coord[2] for coord in coordinates_aneas]
+
+date_strings = [
+'2022-08-10T00:00:00',
+'2022-09-09T00:00:00',
+'2022-10-09T00:00:00',
+'2022-11-08T00:00:00',
+'2022-12-08T00:00:00',
+'2023-01-07T00:00:00',
+'2023-02-06T00:00:00',
+'2023-03-08T00:00:00',
+'2023-04-07T00:00:00',
+'2023-05-07T00:00:00',
+'2023-06-06T00:00:00',
+'2023-07-06T00:00:00',
+'2023-08-05T00:00:00',
+'2023-09-04T00:00:00',
+'2023-10-04T00:00:00',
+'2023-11-03T00:00:00',
+'2023-12-03T00:00:00',
+'2024-01-02T00:00:00'
+    # Add more dates here...
+] 
+
+
+for date_str in date_strings:
+    observing_time = Time(date_str)
+ 
+ # Calculate the position of the Sun
+with solar_system_ephemeris.set('builtin'):
+        sun_position = get_body_barycentric('sun', observing_time)
+
+
+    # Append the coordinates to the lists
+sun_coordinates.append((0, 0, 0))
+
+# Create a 3D scatter plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot the positions of the Sun and asteroids
+ax.scatter(0, 0, 0, c='yellow', label='Sun', s=100)
+
+# Plot the points
+#ax.scatter(x, y, z, c='b', marker='o')
+ax.scatter(x2, y2, z2, c='b', marker='o')
+
+# Set labels for the axes
+ax.set_xlabel('X Label')
+ax.set_ylabel('Y Label')
+ax.set_zlabel('Z Label')
+
+# Show the plot
+plt.show()

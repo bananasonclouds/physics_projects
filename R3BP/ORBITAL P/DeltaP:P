@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+#ORBPAR= eccentricity,semi-majoraxis,long.ascendingnode,inclination,argumentofperiapsis 
+#5graphstotal
+
+num_observationsH=[3,6,9,12,15,18,21,24,27,30]
+helio_uncertainty = [0.01, 0.015, 0.02, 0.025, 0.03]  
+
+num_observationsK=[3,6,9,12,15,18,21,24,27,30]
+kallisto_uncertainty = [0.015, 0.02, 0.03, 0.035, 0.04]  
+
+num_observationsA=[3,6,9,12,15,18,21,24,27,30]
+aneas_uncertainty = [0.02, 0.03, 0.04, 0.045, 0.05]  
+
+
+plt.figure(figsize=(8, 6))
+plt.title('Fractional Uncertainty vs. Number of Observations')
+plt.plot(num_observationsH, helio_uncertainty, label='Asteroid 1', marker='o')
+plt.plot(num_observationsK, kallisto_uncertainty, label='Asteroid 2', marker='s')
+plt.plot(num_observationsA, aneas_uncertainty, label='Asteroid 3', marker='^')
+plt.xlabel('Number of Observations')
+plt.ylabel('Fractional Uncertainty')
+plt.grid(True)
+plt.legend()
+
+plt.show()
+
+
+
+
+
+

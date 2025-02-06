@@ -1,0 +1,44 @@
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+
+# Replace the following with your sets of x, y, z coordinates
+coordinates = [
+    (2.3612069587858016, 1.6191920596530622, -0.2764542590196006),
+    (2.6023272842677736, 2.043247622471402, -0.09263422488680328),
+    (2.5818084956596286, 2.509502653300652, 0.10948136513306542),
+    (2.297899431130209, 2.9196309971394543, 0.2872697246918256),
+    (1.8386780627328672, 3.13647913923454, 0.3812743272474866),
+    # Add more sets of coordinates here
+]
+
+# Extract x, y, and z coordinates from the list of tuples
+x = np.array([coord[0] for coord in coordinates])
+y = np.array([coord[1] for coord in coordinates])
+z = np.array([coord[2] for coord in coordinates])
+
+# Create a 3D scatter plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot the points
+ax.scatter(x, y, z, c='b', marker='o', label='Scatter Points')
+
+# Perform curve fitting and plot the best-fit curve
+coefficients = np.polyfit(x, y, 2)  # Example: fitting a quadratic curve (adjust as needed)
+curve_x = np.linspace(min(x), max(x), 100)
+curve_y = np.polyval(coefficients, curve_x)
+curve_z = np.polyval(coefficients, curve_x)  # Assuming z follows the same curve
+
+ax.plot(curve_x, curve_y, curve_z, linestyle='-', color='red', label='Best-Fit Curve')
+
+# Set labels for the axes
+ax.set_xlabel('X Label')
+ax.set_ylabel('Y Label')
+ax.set_zlabel('Z Label')
+
+# Show the legend
+ax.legend()
+
+# Show the plot
+plt.show()
